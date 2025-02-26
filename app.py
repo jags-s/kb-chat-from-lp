@@ -46,7 +46,8 @@ def handle_feedback(message_idx, feedback_type):
             "timestamp": datetime.now().isoformat(),
             "message_content": st.session_state.messages[message_idx]["content"]
         }
-        # You can add API call here to store positive feedback
+        
+# You can add API call here to store positive feedback
 
 def submit_negative_feedback(message_idx, categories, correction_text):
     """Submit negative feedback with categories and correction"""
@@ -171,66 +172,66 @@ def logout():
     st.session_state.session_id = None
 
 
-def display_chat_messages():
-    # Create a container for the entire chat area
-    with st.container():
-        st.markdown('<div class="chat-container">', unsafe_allow_html=True)
+# def display_chat_messages():
+#     # Create a container for the entire chat area
+#     with st.container():
+#         st.markdown('<div class="chat-container">', unsafe_allow_html=True)
         
-        # Messages container
-        with st.container():
-            st.markdown('<div class="chat-messages">', unsafe_allow_html=True)
-            for idx, message in enumerate(st.session_state.messages):
-                message_class = "user-message" if message["role"] == "user" else "assistant-message"
-                st.markdown(f'<div class="{message_class}">{message["content"]}</div>', unsafe_allow_html=True)
+#         # Messages container
+#         with st.container():
+#             st.markdown('<div class="chat-messages">', unsafe_allow_html=True)
+#             for idx, message in enumerate(st.session_state.messages):
+#                 message_class = "user-message" if message["role"] == "user" else "assistant-message"
+#                 st.markdown(f'<div class="{message_class}">{message["content"]}</div>', unsafe_allow_html=True)
                 
-        # Show feedback buttons only for assistant messages
-        if message["role"] == "assistant":
-            col1, col2, col3 = st.columns([0.1, 0.1, 0.8])
+#         # Show feedback buttons only for assistant messages
+#         if message["role"] == "assistant":
+#             col1, col2, col3 = st.columns([0.1, 0.1, 0.8])
             
-            # Don't show feedback buttons if feedback already provided
-            if idx not in st.session_state.feedback_states:
-                with col1:
-                    if st.button("👍", key=f"thumbsup_{idx}"):
-                        handle_feedback(idx, "up")
-                        st.rerun()
-                with col2:
-                    if st.button("👎", key=f"thumbsdown_{idx}"):
-                        handle_feedback(idx, "down")
-                        st.rerun()
+#             # Don't show feedback buttons if feedback already provided
+#             if idx not in st.session_state.feedback_states:
+#                 with col1:
+#                     if st.button("👍", key=f"thumbsup_{idx}"):
+#                         handle_feedback(idx, "up")
+#                         st.rerun()
+#                 with col2:
+#                     if st.button("👎", key=f"thumbsdown_{idx}"):
+#                         handle_feedback(idx, "down")
+#                         st.rerun()
             
-            # Show feedback categories if thumbs down was clicked
-            if idx in st.session_state.show_feedback_categories and st.session_state.show_feedback_categories[idx]:
-                with st.container():
-                    st.write("Please help us improve by selecting the issues:")
-                    feedback_categories = {
-                        "Incorrect Information": st.checkbox("Incorrect Information", key=f"cat1_{idx}"),
-                        "Incomplete Answer": st.checkbox("Incomplete Answer", key=f"cat2_{idx}"),
-                        "Not Relevant": st.checkbox("Not Relevant", key=f"cat3_{idx}"),
-                        "Unclear Response": st.checkbox("Unclear Response", key=f"cat4_{idx}"),
-                        "Other": st.checkbox("Other", key=f"cat5_{idx}")
-                    }
+#             # Show feedback categories if thumbs down was clicked
+#             if idx in st.session_state.show_feedback_categories and st.session_state.show_feedback_categories[idx]:
+#                 with st.container():
+#                     st.write("Please help us improve by selecting the issues:")
+#                     feedback_categories = {
+#                         "Incorrect Information": st.checkbox("Incorrect Information", key=f"cat1_{idx}"),
+#                         "Incomplete Answer": st.checkbox("Incomplete Answer", key=f"cat2_{idx}"),
+#                         "Not Relevant": st.checkbox("Not Relevant", key=f"cat3_{idx}"),
+#                         "Unclear Response": st.checkbox("Unclear Response", key=f"cat4_{idx}"),
+#                         "Other": st.checkbox("Other", key=f"cat5_{idx}")
+#                     }
                     
-                    correction = st.text_area(
-                        "Please provide the correct information or additional details (optional):",
-                        key=f"correction_{idx}"
-                    )
+#                     correction = st.text_area(
+#                         "Please provide the correct information or additional details (optional):",
+#                         key=f"correction_{idx}"
+#                     )
                     
-                    if st.button("Submit Feedback", key=f"submit_feedback_{idx}"):
-                        selected_categories = [
-                            cat for cat, selected in feedback_categories.items() 
-                            if selected
-                        ]
-                        submit_negative_feedback(idx, selected_categories, correction)
-                        st.rerun()
+#                     if st.button("Submit Feedback", key=f"submit_feedback_{idx}"):
+#                         selected_categories = [
+#                             cat for cat, selected in feedback_categories.items() 
+#                             if selected
+#                         ]
+#                         submit_negative_feedback(idx, selected_categories, correction)
+#                         st.rerun()
 
                     
-                if "references" in message:
-                    show_references(message["references"], idx)
+#                 if "references" in message:
+#                     show_references(message["references"], idx)
             
-            st.markdown('</div>', unsafe_allow_html=True)
+#             st.markdown('</div>', unsafe_allow_html=True)
         
-        # Chat input will automatically be placed at the bottom
-        st.markdown('</div>', unsafe_allow_html=True)
+#         # Chat input will automatically be placed at the bottom
+#         st.markdown('</div>', unsafe_allow_html=True)
 
 
 def display_chat_messages():
@@ -317,6 +318,23 @@ def handle_chat_input(user_input):
                 st.error("Failed to get response from API")
 
 def create_layout():
+    # Remove default Streamlit padding
+    st.markdown("""
+        <style>
+            .block-container {
+                padding-top: 0;
+                padding-bottom: 0;
+                padding-left: 0;
+                padding-right: 0;
+            }
+            .element-container {
+                margin: 0;
+            }
+            .stApp {
+                margin: 0;
+            }
+        </style>
+    """, unsafe_allow_html=True)
     with st.container():
         header_col, _, chat_button_col = st.columns([0.7, 0.2, 0.1])
         
