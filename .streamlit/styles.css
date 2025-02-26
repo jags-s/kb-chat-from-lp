@@ -1,0 +1,131 @@
+
+/* Main Layout Components */
+#MainMenu {visibility: hidden;}                /* Hamburger menu */
+header {visibility: hidden;}                   /* Header with deployment button */
+
+.stApp {
+    background-color: white;
+}
+
+.user-message {
+    background-color: #E6F3FA;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 10px;
+    border-left: 4px solid #001aff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.assistant-message {
+    background-color: white;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 10px;
+    border-left: 4px solid #002A5C;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.reference-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 5px 0;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.reference-section {
+    margin: 8px 0;
+}
+
+.reference-section-title {
+    color: #002A5C;
+    font-size: 0.9em;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.reference-uri {
+    font-family: monospace;
+    background-color: #F5F5F5;
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 0.9em;
+    color: #002A5C;
+    margin: 0;
+}
+
+.reference-snippet {
+    background-color: #E6F3FA;
+    padding: 12px;
+    border-radius: 8px;
+    margin: 0;
+    border-left: 4px solid #001aff;
+}
+
+.reference-footer {
+    font-size: 0.8em;
+    color: #666;
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px solid #eee;
+}
+
+.chat-header {
+    background-color: #001aff;
+    padding: 2px;
+    border-radius: 2px;
+    margin-bottom: 2px;
+    color: white;
+    text-align: center;
+}
+
+.stButton button {
+    background-color: #E6F3FA;
+    color: #002A5C;
+    border: 1px solid #001aff;
+    transition: all 0.3s ease;
+}
+
+.stButton button:hover {
+    background-color: #001aff;
+    color: white;
+}
+
+div[data-testid="stExpander"] {
+    border: none;
+    box-shadow: none;
+}
+
+.reference-container {
+    margin-top: 10px;
+}
+
+.feedback-container {
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+
+.feedback-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2em;
+    padding: 4px 8px;
+    transition: transform 0.2s;
+}
+
+.feedback-button:hover {
+    transform: scale(1.2);
+}
+
+.feedback-categories {
+    margin-top: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+
+
